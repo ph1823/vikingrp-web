@@ -1,5 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
+    <head>
+        <!-- TAILWIND -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="{{ asset('') }}"></script>
+
+        <!-- FONTAWESOME -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <!-- FONTS -->
+        <link rel="stylesheet" href="{{ asset('assets/fonts/fonts.css') }}">
+
+
+        <link rel="stylesheet" href="{{ asset('mai') }}">
+        <script src="./content/js/functions.js"></script>
+
+        <meta charset="UTF-8">
+        <title>VikingRP - {% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
     <header class="font-semibold flex justify-evenly items-center p-5" style="background-color:#0B0B0B ;font-size: 1.2em; border-bottom: 1px solid rgb(60, 60, 65); position: sticky; top: 0; z-index:10;color:#fff">
         <div class="flex items-center mx-4">
             <img class="w-24 mx-2" src="{{ asset('assets/img/logo_v.png')}}" alt="VikingRP">
@@ -32,15 +55,6 @@
             <i style="color: #28CA43;" class="fa-solid fa-wifi fa-fade mx-2"></i>
         </div>
     </header>
-    <head>
-        <meta charset="UTF-8">
-        <title>VikingRP - {% block title %}{% endblock %}</title>
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-        {% endblock %}
-    </head>
     <body>
         {% block body %}{% endblock %}
     </body>
