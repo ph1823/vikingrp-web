@@ -3,11 +3,7 @@
 {% block title %}Accueil{% endblock %}
 {% block body %}
     <section id="mainsection" style="background-image: linear-gradient(to bottom, #ffffff00 0%, #060606 100%);"
-             class="video-section flex flex-col justify-center items-center">
-        <div class="video-container">
-            <video style="filter: blur(6px) grayscale(50%); transform: scale(1.2); contrast(1.2);" loop
-                   id="background-video" src="{{ asset('assets/video/trailer.webm') }}" autoplay muted></video>
-        </div>
+             class="flex flex-col justify-center items-center">
         <div class="text-center" style="width: 80%;">
             <h1 data-aos="zoom-in" data-aos-delay="50" class="text-6xl font-extrabold">Bienvenue <?php echo($pseudo)?>
                 sur Viking Roleplay</h1>
@@ -31,7 +27,7 @@
             </div>
             <div class="mx-6 font-extrabold py-2 px-6 items-center flex"
                  style="background-color: #e19f2750; border: 1px solid rgb(60, 60, 65); padding-right: 20px; padding-left:10px">
-                <img class="w-10" src="{{ asset('assets/img/logo.gif') }}"/>
+                <img class="w-10" src="{{ asset('assets/img/logo.gif') }}" alt="logo animated"/>
                 <a href="#">Nous rejoindre</a>
             </div>
         </div>
@@ -47,14 +43,14 @@
                     <h1 id="text-trailer" class="text-8xl mb-2 italic"
                         style="-webkit-text-stroke: 2px #ffffff50 ;text-shadow: 0 0 30px rgba(255, 204, 0, 0.6); background: linear-gradient(#ffe98d, #e19f27); -webkit-background-clip:text; -webkit-text-fill-color: transparent">
                         TRAILER</h1>
-                    <p class="text-2xl">Découvrez l'épopée qui vous attend sur notre serveur Minecraft viking épique !
+                    <p class="text-2xl text-white">Découvrez l'épopée qui vous attend sur notre serveur Minecraft viking épique !
                         Plongez au cœur d'un monde rempli de mystères, de conquêtes et de légendes. Notre trailer
                         captivant vous transporte à travers des paysages majestueux, des batailles épiques et des
                         constructions impressionnantes !</p>
                 </div>
                 <div data-aos="zoom-in" class="rounded-lg p-4 flex flex-col items-center">
-                    <video style=" width: 700px; border: 1px solid rgb(60, 60, 65);" class="mx-6 rounded-lg" controls
-                           src="{{ asset('assets/video/trailer.mp4') }}"></video>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/wbxIk1bI-mc?si=a0hhzOUdGL--UPKb" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
