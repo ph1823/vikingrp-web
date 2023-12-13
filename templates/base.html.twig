@@ -12,8 +12,7 @@
         <link rel="stylesheet" href="{{ asset('assets/fonts/fonts.css') }}">
 
 
-        <link rel="stylesheet" href="{{ asset('mai') }}">
-        <script src="./content/js/functions.js"></script>
+        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
         <meta charset="UTF-8">
         <title>VikingRP - {% block title %}{% endblock %}</title>
@@ -43,7 +42,7 @@
         </div>
 
         {% if app.user %}
-        <a href="{{ url('/') }}" class="px-5 py-2 flex items-center button_anim mx-4" style="background-color: #ffffff20; border: 1px solid rgb(60, 60, 65);">
+        <a href="/" class="px-5 py-2 flex items-center button_anim mx-4" style="background-color: #ffffff20; border: 1px solid rgb(60, 60, 65);">
             <img src="https://mineskin.eu/armor/bust/Notch.png" alt="Tête du joueur" class="w-8 h-8 mx-1">
             <h1 class="mx-1 show-resp">MON COMPTE</h1>
         </a>
