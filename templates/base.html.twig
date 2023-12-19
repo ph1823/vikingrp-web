@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <!-- TAILWIND -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="{{ asset('') }}"></script>
-
         <!-- FONTAWESOME -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -17,11 +13,14 @@
         <meta charset="UTF-8">
         <title>VikingRP - {% block title %}{% endblock %}</title>
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+
     <header class="font-semibold flex justify-evenly items-center p-5" style="background-color:#0B0B0B ;font-size: 1.2em; border-bottom: 1px solid rgb(60, 60, 65); position: sticky; top: 0; z-index:10;color:#fff">
         <div class="flex items-center mx-4">
             <img class="w-24 mx-2" src="{{ asset('assets/img/logo_v.png')}}" alt="VikingRP">
@@ -41,11 +40,21 @@
 
         </div>
 
-        {% if app.user %}
-        <a href="/" class="px-5 py-2 flex items-center button_anim mx-4" style="background-color: #ffffff20; border: 1px solid rgb(60, 60, 65);">
-            <img src="https://mineskin.eu/armor/bust/Notch.png" alt="Tête du joueur" class="w-8 h-8 mx-1">
-            <h1 class="mx-1 show-resp">MON COMPTE</h1>
-        </a>
+        {% if not app.user %}
+            <div class="relative inline-block text-left dropdown">
+                <a href="/" class="dropdown-toggle px-5 py-2 flex items-center button_anim mx-4" style="background-color: #ffffff20; border: 1px solid rgb(60, 60, 65);">
+                    <img src="https://mineskin.eu/armor/bust/Notch.png" alt="Tête du joueur" class="w-8 h-8 mx-1">
+                    <h1 class="mx-1 show-resp">MON COMPTE</h1>
+                </a>
+
+                <!-- Dropdown menu, initially hidden -->
+                <div id="dropdownMenu" class="hidden absolute z-50 mt-2 space-y-2 bg-white border border-gray-300 rounded-md shadow-lg">
+                    <!-- Dropdown items -->
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Item 1</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Item 2</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Item 3</a>
+                </div>
+            </div>
         {% else %}
             <a href="">Inscription</a>
             <a href="">Connexion</a>
@@ -94,4 +103,30 @@
             </div>
         </div>
     </footer>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all elements with the 'dropdown' class
+            var dropdowns = document.querySelectorAll('.dropdown');
+
+            // Loop through each dropdown and add event listeners
+            dropdowns.forEach(function(dropdown) {
+                var dropdownButton = dropdown.querySelector('.dropdown-toggle');
+                var dropdownMenu = dropdown.querySelector('.absolute');
+
+                // Check if the elements exist before adding event listeners
+                if (dropdownButton && dropdownMenu) {
+                    dropdownButton.addEventListener('mouseover', function() {
+                        console.log("test");
+                        dropdownMenu.classList.toggle('hidden');
+                    });
+
+                    document.addEventListener('mouseleave', function(event) {
+                        if (!dropdownMenu.contains(event.target) && !dropdownButton.contains(event.target)) {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </html>

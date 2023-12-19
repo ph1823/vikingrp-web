@@ -49,3 +49,10 @@ input:focus {
   outline: none;
   border: none;
 }
+
+header {
+  height: 10vh;
+}
+.mainsection {
+  height: 90vh;
+}
