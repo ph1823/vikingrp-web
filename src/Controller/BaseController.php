@@ -8,9 +8,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class BaseController extends AbstractController
 {
-    public function render(string $view, array $parameters = [], Response $response = null): Response
+    public function renderBase(string $view, array $parameters = []): Response
     {
         $parameters["playerOnline"] = 0;
-        return $this->render($view, $parameters, $response);
+        return $this->render($view, $parameters);
     }
 }
