@@ -7,11 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+#[Vich\Uploadable]
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,11 +28,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var ?string The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $skin = "";
+
+    #[Vich\UploadableField(mapping: 'textures', fileNameProperty: 'skin')]
+    private ?File $skinImage = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
     public function getId(): ?int
     {
         return $this->id;
@@ -98,5 +109,68 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getSkin(): ?string
+    {
+        return $this->skin;
+    }
+
+    public function setSkin(?string $skin): static
+    {
+        $this->skin = $skin;
+
+        return $this;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|null $skinImage
+     */
+    public function setSkinImage(?File $skinImage = null): void
+    {
+        $this->skinImage = $skinImage;
+
+        if (null !== $skinImage) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getSkinImage(): ?File
+    {
+        return $this->skinImage;
+    }
+
+    public function serialize()
+    {
+        return $this->__serialize();
+    }
+
+    public function unserialize(string $data)
+    {
+        return $this->unserialize($data);
+    }
+
+    public function __serialize(): array
+    {
+        return ["id" => $this->getId(),
+            "username" => $this->getUsername(),
+            "password" => $this->getPassword(),
+            "skin" => $this->getSkin()];
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->id = $data["id"];
+        $this->setSkin($data["skin"]);
+        $this->setPassword($data["password"]);
+        $this->setUsername($data["username"]);
     }
 }
