@@ -40,7 +40,7 @@
 
         </div>
 
-        {% if not app.user %}
+        {% if app.user %}
             <div class="relative inline-block text-left dropdown">
                 <a href="/" class="dropdown-toggle px-5 py-2 flex items-center button_anim mx-4" style="background-color: #ffffff20; border: 1px solid rgb(60, 60, 65);">
                     <img src="https://mineskin.eu/armor/bust/Notch.png" alt="Tête du joueur" class="w-8 h-8 mx-1">
@@ -52,12 +52,12 @@
                     <!-- Dropdown items -->
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Item 1</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Item 2</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Item 3</a>
+                    <a href="{{ path('app_logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a>
                 </div>
             </div>
         {% else %}
-            <a href="">Inscription</a>
-            <a href="">Connexion</a>
+            <a href="{{ path('app_register') }}">Inscription</a>
+            <a href="{{ path('app_login') }}">Connexion</a>
         {% endif %}
 
         <div class="flex items-center rounded-full p-1">
@@ -106,12 +106,12 @@
     <script defer>
         document.addEventListener('DOMContentLoaded', function() {
             // Get all elements with the 'dropdown' class
-            var dropdowns = document.querySelectorAll('.dropdown');
+            const dropdowns = document.querySelectorAll('.dropdown');
 
             // Loop through each dropdown and add event listeners
             dropdowns.forEach(function(dropdown) {
-                var dropdownButton = dropdown.querySelector('.dropdown-toggle');
-                var dropdownMenu = dropdown.querySelector('.absolute');
+                const dropdownButton = dropdown.querySelector('.dropdown-toggle');
+                const dropdownMenu = dropdown.querySelector('.absolute');
 
                 // Check if the elements exist before adding event listeners
                 if (dropdownButton && dropdownMenu) {
