@@ -3,12 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
 use App\Form\SkinUpload;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Exception\ORMException;
-use Doctrine\ORM\OptimisticLockException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -22,11 +19,9 @@ class HomeController extends BaseController
     }
 
 
-    /**
-     * @throws OptimisticLockException
-     */
+
     #[Route('/skin', name: 'skin_main')]
-    public function skin(Request $request, EntityManagerInterface $entityManager)
+    public function skin(Request $request, EntityManagerInterface $entityManager): RedirectResponse|Response
     {
         /** @var ?User $user */
         $user = $this->getUser();

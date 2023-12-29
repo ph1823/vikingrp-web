@@ -34,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $skin = "";
+    private ?string $skinImageName = "";
 
     #[Vich\UploadableField(mapping: 'textures', fileNameProperty: 'skin')]
     private ?File $skinImage = null;
@@ -111,14 +111,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         // $this->plainPassword = null;
     }
 
-    public function getSkin(): ?string
+    public function getSkinImageName(): ?string
     {
-        return $this->skin;
+        return $this->skinImageName;
     }
 
-    public function setSkin(?string $skin): static
+    public function setSkinImageName(?string $skinImageName): static
     {
-        $this->skin = $skin;
+        $this->skinImageName = $skinImageName;
 
         return $this;
     }
@@ -163,13 +163,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         return ["id" => $this->getId(),
             "username" => $this->getUsername(),
             "password" => $this->getPassword(),
-            "skin" => $this->getSkin()];
+            "skin" => $this->getSkinImageName()];
     }
 
     public function __unserialize(array $data): void
     {
         $this->id = $data["id"];
-        $this->setSkin($data["skin"]);
+        $this->setSkinImageName($data["skin"]);
         $this->setPassword($data["password"]);
         $this->setUsername($data["username"]);
     }
