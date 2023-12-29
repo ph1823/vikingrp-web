@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\User;
 use App\Form\SkinUpload;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +15,16 @@ use Symfony\Component\Routing\Attribute\Route;
 class HomeController extends BaseController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->renderBase('home.html.twig');
+        return $this->renderBase('home.html.twig', ['articles' => $articleRepository->findAll()]);
     }
 
+    #[Route('/article/{id}', name: 'app_article')]
+    public function article(Article $article): Response
+    {
+        return $this->renderBase('home.html.twig', ['article' => $article]);
+    }
 
 
     #[Route('/skin', name: 'skin_main')]

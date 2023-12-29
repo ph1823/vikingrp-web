@@ -74,11 +74,15 @@
 
         <div class="flex flex-col items-center text-left " style="width:80%;">
             <div data-aos="zoom-in" class="flex my-4 flex-wrap justify-center">
-                <div class="mx-8">
-                    <img style="height: 16vh; " src="{{ asset('assets/img/patch/patch1.png') }}" alt="VikingRP">
-                    <h1 class="font-bold">Notes de patch 13.22</h1>
-                    <p class="italic">09/11/2023</p>
-                </div>
+                {% for article in articles %}
+                    <div class="mx-8">
+                        <img style="height: 16vh; " src="{{ vich_uploader_asset(article, 'articleImage') }}" alt="VikingRP">
+                        <h2 class="font-bold">{{ article.title }}</h2>
+                        <p class="italic"></p>
+                        <p>{{ article.content | |slice(0, 256)  }}</p>
+                        <p><a>Lire l'article</a></p>
+                    </div>
+                {% endfor %}
                 <a href="">Voir plus</a>
             </div>
         </div>
