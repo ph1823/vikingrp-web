@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0d7602a-8150-4abc-adf4-bedcf8138aa3" name="Changes" comment="add common render">
+    <list default="true" id="b0d7602a-8150-4abc-adf4-bedcf8138aa3" name="Changes" comment="add article crud">
+      <change afterPath="$PROJECT_DIR$/templates/admin/home.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/vich_uploader.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/vich_uploader.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -167,6 +172,9 @@
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
       <path value="$PROJECT_DIR$/vendor/vich/uploader-bundle" />
       <path value="$PROJECT_DIR$/vendor/jms/metadata" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/vendor/easycorp/easyadmin-bundle" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -239,6 +247,7 @@
       <workItem from="1703339802454" duration="43000" />
       <workItem from="1703339921267" duration="27000" />
       <workItem from="1703586679705" duration="210000" />
+      <workItem from="1703851355962" duration="1864000" />
     </task>
     <task id="LOCAL-00001" summary="update gitignore">
       <option name="closed" value="true" />
@@ -336,7 +345,31 @@
       <option name="project" value="LOCAL" />
       <updated>1703326367491</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add easy admin">
+      <option name="closed" value="true" />
+      <created>1703851451023</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1703851451023</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add base admin">
+      <option name="closed" value="true" />
+      <created>1703852287823</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1703852287823</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add article crud">
+      <option name="closed" value="true" />
+      <created>1703852597362</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1703852597362</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,6 +400,9 @@
     <MESSAGE value="add login and register form" />
     <MESSAGE value="update depracated import" />
     <MESSAGE value="add common render" />
-    <option name="LAST_COMMIT_MESSAGE" value="add common render" />
+    <MESSAGE value="add easy admin" />
+    <MESSAGE value="add base admin" />
+    <MESSAGE value="add article crud" />
+    <option name="LAST_COMMIT_MESSAGE" value="add article crud" />
   </component>
 </project>
