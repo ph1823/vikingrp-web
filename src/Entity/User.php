@@ -41,6 +41,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $mail = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -172,5 +177,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         $this->setSkinImageName($data["skin"]);
         $this->setPassword($data["password"]);
         $this->setUsername($data["username"]);
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): static
+    {
+        $this->mail = $mail;
+
+        return $this;
     }
 }
