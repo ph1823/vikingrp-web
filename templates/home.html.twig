@@ -57,7 +57,7 @@
     </section>
 
     <!-- path note section !-->
-    <section class="flex flex-col items-center justify-center text-center bg-cover patchnote" id="patch"
+    <section class="flex flex-col items-center justify-center text-center bg-cover" id="patch"
              style="height:110vh; background-image: linear-gradient(to bottom, #060606, #06060680), url({{ asset('assets/img/bg/2.png') }}); background-repeat:no-repeat; margin: auto;">
 
         <div data-aos="zoom-in" class="flex flex-col items-center mx-auto text-center" style="width: 42%;">
@@ -65,26 +65,22 @@
                 style="-webkit-text-stroke: 2px #ffffff50 ;text-shadow: 0 0 30px rgba(255, 204, 0, 0.6); background: linear-gradient(#ffe98d, #e19f27); -webkit-background-clip:text; -webkit-text-fill-color: transparent">
                 NOTES DE PATCH</h1>
         </div>
-        <div data-aos="zoom-in" class="mb-12 text-2xl " style="width: 80%;">
+        <div data-aos="zoom-in" class="mb-12 text-2xl text-white" style="width: 80%;">
             <p>
                 Ne manquez aucune des dernières actualités de notre serveur Minecraft RP en suivant les notes de patch
                 quotidiennes ici. Embarquez pour des aventures épiques au cœur de notre monde viking !
             </p>
         </div>
 
-        <div class="flex flex-col items-center text-left " style="width:80%;">
-            <div data-aos="zoom-in" class="flex my-4 flex-wrap justify-center">
-                {% for article in articles %}
-                    <div class="mx-8">
-                        <img style="height: 16vh; " src="{{ vich_uploader_asset(article, 'articleImage') }}" alt="VikingRP">
-                        <h2 class="font-bold">{{ article.title }}</h2>
-                        <p class="italic"></p>
-                        <p>{{ article.content | |slice(0, 256)  }}</p>
-                        <p><a>Lire l'article</a></p>
-                    </div>
-                {% endfor %}
-                <a href="">Voir plus</a>
-            </div>
+        <div class="text-white">
+            {% for article in articles %}
+                <div class="mt-4 mb-4">
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.content | slice(0, 180) | raw }}</p>
+                    <p class="font-bold">Le ..</p>
+                </div>
+            {% endfor %}
+            <a href="">Voir plus</a>
         </div>
     </section>
 
