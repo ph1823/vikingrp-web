@@ -58,4 +58,10 @@ class HomeController extends BaseController
     {
 
     }
+
+    #[Route('/profile', name: 'user_profile')]
+    public function profile()
+    {
+        return $this->renderBase('user/dashboard.html.twig');
+    }
 }
