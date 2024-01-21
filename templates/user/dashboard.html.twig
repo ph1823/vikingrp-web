@@ -2,25 +2,122 @@
 
 {% block title %}Espace membre{% endblock %}
 
-{% block body %}
-<section style="background: linear-gradient(to bottom, #0B0B0B50, #0B0B0B), url({{ asset('assets/img/bg/6.png') }}); background-size:cover;height: 95vh;" id="main">
-    <div id="profile">
-        <form onsubmit="">
-            <div class="form-div">
-                <label for="email">Adresse E-mail</label>
-                <input type="email" value="{{ app.user.mail }}" id="email">
-            </div>
-            <div class="form-div">
-                <label for="username">Nom d'utilisaeur</label>
-                <input type="text" id="username" name="username" value="{{ app.user.username }}">
-            </div>
-            <div class="form-div">
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('skin') }}
+{% endblock %}
 
-            </div>
-        </form>
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('skin') }}
+{% endblock %}
+
+{% block body %}
+<section style="background: url({{ asset('assets/img/bg/6.png') }});" id="main">
+    <div id="basicInfo">
+        <div id="profile">
+            <h2>Modification du profil</h2>
+            <form method="post" action="" id="updateProfile">
+                <div class="form-div">
+                    <label for="email">Adresse E-mail</label>
+                    <input type="email" value="{{ app.user.mail }}" id="email" name="email">
+                    <span class="error" id="error-email"></span>
+                </div>
+                <div class="form-div">
+                    <label for="username">Nom d'utilisaeur</label>
+                    <input type="text" id="username" name="username" value="{{ app.user.username }}">
+                    <span class="error" id="error-username"></span>
+                </div>
+                <div class="form-div">
+                    <label for="password">Mot de passe actuelle</label>
+                    <input type="password" id="password" name="password">
+                    <span class="error" id="error-password"></span>
+                </div>
+                <div class="form-div">
+                    <label for="newPassword">Nouveau mot de passe</label>
+                    <input type="password" id="newPassword" name="newPassword">
+                    <span class="error" id="error-newPassword"></span>
+                </div>
+                <div class="form-div">
+                    <label for="newConfirmPassword">Confirmation nouveau mot de passe</label>
+                    <input type="password" id="newConfirmPassword" name="newConfirmPassword">
+                </div>
+                <button class="confirm" type="submit">Valider</button>
+            </form>
+        </div>
+        <div id="skin">
+            <h2>Skin actuelle</h2>
+            <canvas id="actualSkin"></canvas>
+        </div>
     </div>
-    <div id="skin">
-        ici on affiche le skin
+    <div style="background-color: rgba(255,255,255,0.42)">
+        <div id="skinComposer"></div>
     </div>
 </section>
+    <script>
+        window.user = {name: '{{ app.user.username }}', skinURL: '{{ path('skin_textures', {username: app.user.username}) }}'}
+        document.getElementById("updateProfile").addEventListener("submit", (e) => updateProfile(e));
+        async function updateProfile(e) {
+            //Cancel form send and get formdata
+            e.preventDefault();
+            const formData = new FormData(e.target, e.submitter);
+            const formObj = Object.fromEntries(formData);
+            const errors = {};
+
+            //Check if data is not empty
+            if(formObj.email === "") errors.email = "L'e-mail ne peut pas être vide.";
+            if(formObj.username === "") errors.username = "Le nom d'utilisateur ne peut pas être vide.";
+            if(formObj.newPassword !== undefined && formObj.newPassword !== "" && formObj.password === "") errors.password = "Le mot de passe ne peut pas être vide.";
+            if(formObj.newPassword === "" && formObj.password !== "" && formObj.password !== undefined) errors.newPpassword = "Le nouveau mot de passe ne peut pas être vide.";
+
+            if(Object.entries(errors).length > 0) {
+                renderError(errors);
+                return;
+            }
+
+            console.log(formObj);
+            //Check if data is valid
+            const usernameRegex = /^[a-zA-Z0-9]+$/;
+            const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if(!usernameRegex.test(formObj.username)) errors.username = "Le nom d'utilisateur ne doit pas contenir de caractère spéciaux.";
+            if(!emailRegex.test(formObj.email)) errors.email = "L'email doit être au format email";
+
+            if(formObj.newPassword !== undefined && formObj.newPassword !== "" && formObj.newPassword !== formObj.newConfirmPassword) errors.newPassword = "Les deux mots de passe ne corresponden pas.";
+
+            if(Object.entries(errors).length > 0) {
+                renderError(errors);
+                return;
+            }
+
+            //Try to update user with user api
+            const response = await fetch("/api/user", {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(formObj)
+            });
+            const json = await response.json();
+            if(!response.ok) {
+                switch (response.status) {
+                    case 401:
+                        alert("Vous n'êtes pas connecter.");
+                        window.location.href = '/login';
+                        break;
+                    case 400:
+                        renderError(json);
+                        break;
+                    default:
+                        alert("Si tu vois cette erreur, on est mal chef");
+                }
+            } else alert("Information mis à jour !");
+        }
+
+        function renderError(errors = {}) {
+            for(let [key, value] of Object.entries(errors)) {
+                const error = document.getElementById("error-" + key);
+                error.innerText = value;
+            }
+        }
+    </script>
 {% endblock %}
