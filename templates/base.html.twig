@@ -33,7 +33,7 @@
         {% if app.user %}
             <div class="relative inline-block text-left dropdown">
                 <a href="/" class="dropdown-toggle px-5 py-2 flex items-center button_anim mx-4" style="background-color: #ffffff20; border: 1px solid rgb(60, 60, 65);">
-                    <img src="https://mineskin.eu/armor/bust/Notch.png" alt="Tête du joueur" class="w-8 h-8 mx-1">
+                    <img src="https://mineskin.eu/armor/bust/{{ app.user.username }}.png" alt="Tête du joueur {{ app.user.username }}" class="w-8 h-8 mx-1">
                     <h1 class="mx-1 show-resp">MON COMPTE</h1>
                 </a>
 
