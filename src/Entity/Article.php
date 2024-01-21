@@ -36,6 +36,9 @@ class Article implements \Serializable
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $write_date = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,5 +139,17 @@ class Article implements \Serializable
         $this->id = $data["id"];
         $this->setTitle($data["title"]);
         $this->setContent($data["content"]);
+    }
+
+    public function getWriteDate(): ?\DateTimeInterface
+    {
+        return $this->write_date;
+    }
+
+    public function setWriteDate(\DateTimeInterface $write_date): static
+    {
+        $this->write_date = $write_date;
+
+        return $this;
     }
 }

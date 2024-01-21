@@ -26,25 +26,17 @@
             <img class="w-24 mx-2" src="{{ asset('assets/img/logo_v.png')}}" alt="VikingRP">
         </div>
         <div class="flex flex-wrap justify-center">
-            <a class="mx-4 button_anim show-resp" href="#" data-aos="zoom-in-down">Wiki <i class="fa-solid fa-book"></i></a>
-            <a class="mx-4 button_anim show-resp" href="https://docs.google.com/forms/d/103_Hx0nskww0CVxxVFsvzz_R3TIezevQ6pSUDS6-vfs" data-aos="zoom-in-down">Candidatures <i class="fa-solid fa-file"></i></a>
+            <a class="mx-4 button_anim show-resp" href="http://wiki.viking-rp.fr/" target="_blank" data-aos="zoom-in-down">Wiki <i class="fa-solid fa-book"></i></a>
+            <a class="mx-4 button_anim show-resp" href="https://docs.google.com/forms/d/103_Hx0nskww0CVxxVFsvzz_R3TIezevQ6pSUDS6-vfs" target="_blank" data-aos="zoom-in-down">Candidatures <i class="fa-solid fa-file"></i></a>
         </div>
 
         {% if app.user %}
-            <div class="relative inline-block text-left dropdown">
-                <a href="/" class="dropdown-toggle px-5 py-2 flex items-center button_anim mx-4" style="background-color: #ffffff20; border: 1px solid rgb(60, 60, 65);">
-                    <img src="https://mineskin.eu/armor/bust/{{ app.user.username }}.png" alt="Tête du joueur {{ app.user.username }}" class="w-8 h-8 mx-1">
-                    <h1 class="mx-1 show-resp">MON COMPTE</h1>
-                </a>
-
-                <!-- Dropdown menu, initially hidden -->
-                <div id="dropdownMenu" class="hidden absolute z-50 mt-2 space-y-2 bg-white border border-gray-300 rounded-md shadow-lg">
-                    <!-- Dropdown items -->
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Item 1</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Item 2</a>
-                    <a href="{{ path('app_logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a>
-                </div>
-            </div>
+            <a href="{{ path('user_profile') }}" class="dropdown-toggle px-5 py-2 flex items-center button_anim mx-4" style="background-color: #ffffff20; border: 1px solid rgb(60, 60, 65);">
+                <img src="https://mineskin.eu/armor/bust/{{ app.user.username }}.png" alt="Tête du joueur {{ app.user.username }}" class="w-8 h-8 mx-1">
+                <h1 class="mx-1 show-resp">MON COMPTE</h1>
+            </a>
+            {% if is_granted('ROLE_ADMIN')  %}<a href="{{ path('admin') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" style="color: orange">Administration <i class="fa-solid fa-gears"></i></a>{% endif %}
+            <a href="{{ path('app_logout') }}" style="color:red" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion <i class="fa-solid fa-right-from-bracket"></i></a>
         {% else %}
             <a href="{{ path('app_register') }}">Inscription</a>
             <a href="{{ path('app_login') }}">Connexion</a>

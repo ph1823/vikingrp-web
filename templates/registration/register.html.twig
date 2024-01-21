@@ -3,7 +3,7 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <section style="background: url('{{ asset('assets/img/bg/2.png') }}')">
+    <section style="background: url('{{ asset('assets/img/bg/2.png') }}'); height: -webkit-fill-available;">
         <h1 style="text-align: center">Inscription</h1>
         {{ form_start(registrationForm, {attr: {class: 'registerForm'}}) }}
         <div class="form-div">
@@ -24,7 +24,7 @@
             <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
         </div>
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="confirm">Inscription</button>
         {{ form_end(registrationForm) }}
     </section>
 {% endblock %}
