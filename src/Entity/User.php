@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     #[ORM\Column(length: 255)]
     private ?string $skinImageName = "";
 
-    #[Vich\UploadableField(mapping: 'textures', fileNameProperty: 'skin')]
+    #[Vich\UploadableField(mapping: 'textures', fileNameProperty: 'skinImageName')]
     private ?File $skinImage = null;
 
     #[ORM\Column(nullable: true)]
