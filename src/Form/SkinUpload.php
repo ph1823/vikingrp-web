@@ -14,7 +14,7 @@ class SkinUpload extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('skinImage', VichImageType::class)
+            ->add('skinImage', VichImageType::class, ['image_uri' => false, 'allow_delete' => false, 'download_label' => 'Télécharger le skin'])
         ;
     }
 

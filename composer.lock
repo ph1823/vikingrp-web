@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eab36dd04c629ae7631deb6cc3f48915",
+    "content-hash": "5f9caf65b532d9775bb72cf4adc8b5dd",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -1654,6 +1654,48 @@
                 }
             ],
             "time": "2023-10-27T15:32:31+00:00"
+        },
+        {
+            "name": "php-minecraft/minecraft-query",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-Minecraft/MinecraftQuery.git",
+                "reference": "8299be0ea55a515944edbb866680c0dad4352a17"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-Minecraft/MinecraftQuery/zipball/8299be0ea55a515944edbb866680c0dad4352a17",
+                "reference": "8299be0ea55a515944edbb866680c0dad4352a17",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "ext-json": "*",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPMinecraft\\MinecraftQuery\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rixafy",
+                    "email": "rixafy@gmail.com"
+                }
+            ],
+            "description": "Minecraft library for retrieving server data (players, motd, favicon..)",
+            "support": {
+                "issues": "https://github.com/PHP-Minecraft/MinecraftQuery/issues",
+                "source": "https://github.com/PHP-Minecraft/MinecraftQuery/tree/v1.0.2"
+            },
+            "time": "2022-11-14T00:15:00+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

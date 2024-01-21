@@ -48,6 +48,13 @@
         <div id="skin">
             <h2>Skin actuelle</h2>
             <canvas id="actualSkin"></canvas>
+
+            <div>
+                {{ form_start(skinForm) }}
+                {{ form_row(skinForm.skinImage) }}
+                <button type="submit" class="confirm" id="upload_skin">Sauvegarder</button>
+                {{ form_end(skinForm) }}
+            </div>
         </div>
     </div>
     <div style="background-color: rgba(255,255,255,0.42)">

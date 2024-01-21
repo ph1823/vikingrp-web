@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\SkinUpload;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,9 +32,8 @@ class HomeController extends BaseController
         return $this->renderBase('home.html.twig', ['article' => $article]);
     }
 
-
-    #[Route('/skin', name: 'skin_main')]
-    public function skin(Request $request, EntityManagerInterface $entityManager): RedirectResponse|Response
+    #[Route('/profile', name: 'user_profile')]
+    public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var ?User $user */
         $user = $this->getUser();
@@ -49,30 +49,16 @@ class HomeController extends BaseController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_home');
         }
 
-        return $this->renderBase('skin/upload.html.twig', [
+        return $this->renderBase('user/dashboard.html.twig', [
             'skinForm' => $form->createView()
         ]);
     }
 
-    #[Route('/skin/create', name: 'skin_create')]
-    public function createSkin()
-    {
-
-    }
-
-    #[Route('/profile', name: 'user_profile')]
-    public function profile(): Response
-    {
-
-        return $this->renderBase('user/dashboard.html.twig');
-    }
-
     #[Route('/api/user', name: 'user_update', methods: 'PUT')]
-    public function updateUser(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager) {
+    public function updateUser(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): JsonResponse
+    {
         $userData = json_decode($request->getContent());
         $errors = [];
 
@@ -103,7 +89,7 @@ class HomeController extends BaseController
             return $this->json($errors, 400);
 
         $user->setUsername($userData->username);
-        $user->setPassword($userData->newPassword);
+        $user->setPassword($passwordHasher->hashPassword($user, $userData->newPassword));
         $user->setMail($user->getMail());
         $entityManager->persist($user);
         $entityManager->flush();
