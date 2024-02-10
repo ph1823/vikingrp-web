@@ -56,43 +56,4 @@ class HomeController extends BaseController
         ]);
     }
 
-    #[Route('/api/user', name: 'user_update', methods: 'PUT')]
-    public function updateUser(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): JsonResponse
-    {
-        $userData = json_decode($request->getContent());
-        $errors = [];
-
-        // Check if data is not empty
-        if(!$userData->email) $errors["email"] = "L'e-mail ne peut pas être vide.";
-        if(!$userData->username) $errors["username"] = "Le nom d'utilisateur ne peut pas être vide.";
-        if(!$userData->newPassword && $userData->password) $errors["password"] = "Le mot de passe ne peut pas être vide.";
-        if($userData->newPassword && !$userData->password) $errors["newPassword"] = "Le nouveau mot de passe ne peut pas être vide.";
-
-        if(!empty($errors))
-            return $this->json($errors, 400);
-
-        // Check if data is valid
-        $usernameRegex = "/^[a-zA-Z0-9]+$/";
-        if(!preg_match($usernameRegex, $userData->username)) $errors["username"] = "Le nom d'utilisateur ne doit pas contenir de caractère spéciaux.";
-        if(!filter_var($userData->email, FILTER_VALIDATE_EMAIL)) $errors["email"] = "L'email doit être au format email";
-        if(!empty($userData->newPassword) && $userData->newPassword !== $userData->newConfirmPassword) $errors["newPassword"] = "Les deux mots de passe ne correspondent pas.";
-
-        if(!empty($errors))
-            return $this->json($errors, 400);
-
-
-        /** @var User $user */
-        $user = $this->getUser();
-        if(!$user) return $this->json(["message" => "Utlisateur non connectée."], 401);
-        if(!$passwordHasher->isPasswordValid($user, $userData->password)) $errors["password"] = "Mot de passe incorect";
-        if(!empty($errors))
-            return $this->json($errors, 400);
-
-        $user->setUsername($userData->username);
-        $user->setPassword($passwordHasher->hashPassword($user, $userData->newPassword));
-        $user->setMail($user->getMail());
-        $entityManager->persist($user);
-        $entityManager->flush();
-        return $this->json("");
-    }
 }
