@@ -23,11 +23,12 @@
 
     <header class="font-semibold flex justify-evenly items-center p-5" style="background-color:#0B0B0B ;font-size: 1.2em; border-bottom: 1px solid rgb(60, 60, 65); position: sticky; top: 0; z-index:10;color:#fff">
         <div class="flex items-center mx-4">
-            <img class="w-24 mx-2" src="{{ asset('assets/img/logo_v.png')}}" alt="VikingRP">
+            <a href="p{{ path('app_home') }}"><img class="w-24 mx-2" src="{{ asset('assets/img/logo_v.png')}}" alt="VikingRP"></a>
         </div>
         <div class="flex flex-wrap justify-center">
             <a class="mx-4 button_anim show-resp" href="http://wiki.viking-rp.fr/" target="_blank" data-aos="zoom-in-down">Wiki <i class="fa-solid fa-book"></i></a>
             <a class="mx-4 button_anim show-resp" href="https://docs.google.com/forms/d/103_Hx0nskww0CVxxVFsvzz_R3TIezevQ6pSUDS6-vfs" target="_blank" data-aos="zoom-in-down">Candidatures <i class="fa-solid fa-file"></i></a>
+            <a style="color: rgba(255, 204, 0);" class="mx-4 button_anim show-resp" href="https://fr.tipeee.com/vikingroleplay" target="_blank" data-aos="zoom-in-down"><i class="fa-solid fa-handshake-angle"></i> Nous soutenir</a>
         </div>
 
         {% if app.user %}
@@ -58,21 +59,21 @@
                 <h1 style="color: #fff">Suivez-nous</h1>
             </div>
             <div style="width: 60%;" class="p-2 justify-evenly flex">
-                <div style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
+                <a href="https://www.youtube.com/@VikingRoleplay" style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
                     <i style="color:#02040F;" class="fa-brands fa-youtube rounded-full py-2 px-3"></i>
-                </div>
-                <div onclick="window.location.href='https://discord.gg/viking-rp-maintenance-535476824734564372'" style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
+                </a>
+                <a href="https://discord.gg/viking-rp-maintenance-535476824734564372" style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
                     <i style="color:#02040F;" class="fa-brands fa-discord rounded-full py-2 px-3"></i>
-                </div>
-                <div style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
+                </a>
+                <a href="https://www.tiktok.com/@vikingroleplay" style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
                     <i style="color:#02040F;" class="fa-brands fa-tiktok rounded-full py-2 px-3"></i>
-                </div>
-                <div style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
+                </a>
+                <!-- <a href="" style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
                     <i style="color:#02040F;" class="fa-solid fa-circle-user rounded-full py-2 px-3"></i>
-                </div>
-                <div style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
+                </a> !-->
+                <a href="https://twitter.com/VikingRoleplay" style="background-color: #fff; height: 4vh; width: 4vh; border: 1px solid rgb(60, 60, 65);" class="flex justify-center rounded-full">
                     <i style="color:#02040F;" class="fa-brands fa-twitter rounded-full py-2 px-3"></i>
-                </div>
+                </a>
             </div>
         </div>
         <hr />
