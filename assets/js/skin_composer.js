@@ -410,19 +410,19 @@ SkinComposer.prototype.drawCanvas = async function() {
 SkinComposer.prototype.uploadImage = async (that) => {
     console.log(that.canvas);
     that.canvas.toBlob((blob) => {
-        const file = new File([blob], `${window.user.username}.png`, { type: "image/png" })
+        const file = new File([blob], `${window.user.name}.png`, { type: "image/png" })
         const formData = new FormData();
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         document.getElementById("skin_upload_skinImage_file").files = dataTransfer.files;
         document.getElementById("upload_skin").click();
-    }, 'image/jpeg');
+    }, 'image/png');
 }
 
 SkinComposer.prototype.downloadImage = function() {
     const link = document.createElement("a");
     link.href = this.canvas.toDataURL("image/png");
-    link.download = "skin.png";
+    link.download = `${window.user.name}.png`;
     document.body.append(link);
     link.click();
     link.remove();

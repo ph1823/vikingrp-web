@@ -15,7 +15,6 @@ const dropdownButtonList = document.querySelectorAll("[role='toggle']");
 for (const button of dropdownButtonList) {
     const dropdown = button.parentElement;
     const content = dropdown.querySelectorAll("[role='content']")[0];
-    console.log(content);
     content.toggle = () => content.classList.toggle("hidden");
     button.addEventListener("click", () => content.toggle());
 }
