@@ -4,9 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\User;
+use App\Entity\WikiCategory;
+use App\Entity\WikiPage;
 use App\Form\SkinUpload;
 use App\Repository\ArticleRepository;
+use App\Repository\WikiCategoryRepository;
+use App\Repository\WikiPageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,6 +58,45 @@ class HomeController extends BaseController
 
         return $this->renderBase('user/dashboard.html.twig', [
             'skinForm' => $form->createView()
+        ]);
+    }
+
+
+    #[NoReturn] #[Route('/wiki/{cat_url?}/{url?}', name: 'wiki_cat')]
+    public function wiki_cat(?string $cat_url, ?string $url, WikiCategoryRepository $wikiCategoryRepository, WikiPageRepository $wikiPageRepository): Response
+    {
+        /** @var ?WikiCategory $wikiCategory */
+        $wikiCategory = $cat_url ? $wikiCategoryRepository->findOneBy(["cat_url" => $cat_url]) : null;
+        $wikiPage = !$wikiCategory ? $wikiPageRepository->findOneBy(["url" => $cat_url, "wikiCategory" => null]) : null;
+        $list = [];
+        if($url != null)
+            $wikiPage = $wikiCategory->getPages()->findFirst(function (int $index, WikiPage $page) use ($url) {
+                return $page->getUrl() === $url;
+            });
+
+        //if we are on main page, we generate a list of cat / wikiaricle without cat
+        if($url == null && $wikiCategory == null) {
+            $list = array_map(function(WikiCategory $cat) {
+                return ["icon" => $cat, "name" => $cat->getCatUrl(),
+                    "iconName" => "catImage", "className" => $cat::class,
+                    "url" => $this->generateUrl('wiki_cat', ["cat_url" =>  $cat->getCatUrl()]),
+                    "iconShow" => $cat->getCatImageName() != null];
+            }, $wikiCategoryRepository->findAll());
+            //
+            $list = array_merge($list, array_map(function(WikiPage $page) {
+                return ["icon" => $page,
+                    "iconShow" => $page->getIconImageName() != null,
+                    "name" => $page->getUrl(),
+                    "url" => $this->generateUrl('wiki_cat', ["cat_url" =>  $page->getUrl()]),
+                    "iconName" => "iconImage",
+                    "className" => $page::class];
+            }, $wikiPageRepository->findBy(['wikiCategory' => null])));
+        }
+
+        return $this->renderBase('wiki.html.twig', [
+            'wiki' => $wikiPage,
+            'cats' => $wikiCategory?->getPages()->toArray(),
+            'list' => $list
         ]);
     }
 

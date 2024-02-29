@@ -20,7 +20,7 @@ class WikiImage
     #[ORM\Column(length: 255)]
     private ?string $wikiImageName = "";
 
-    #[Vich\UploadableField(mapping: 'textures', fileNameProperty: 'wikiImageName')]
+    #[Vich\UploadableField(mapping: 'wiki_pages', fileNameProperty: 'wikiImageName')]
     private ?File $wikiImage = null;
 
     #[ORM\Column(nullable: true)]

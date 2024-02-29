@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('wiki') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('wiki') }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if wiki is not null %}
+            {% for image in wiki.images %}
+                <img src="{{ vich_uploader_asset(image, 'wikiImage') }}" style="margin: auto"/>
+            {% endfor %}
+        {% elseif cats is not null %}
+            <div class="container">
+            {% for page in cats %}
+                    <div class="column">
+                        <a href="{{ path('wiki_cat', {cat_url: page.wikiCategory.catUrl, url: page.url}) }}">
+                            {% if page.iconImage is not null %}<img src="{{ vich_uploader_asset(page, "iconImage") }}" alt="icon section {{ page.url }}">{% endif %}
+                            <p>{{ page.url }}</p>
+                        </a>
+                    </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <div class="container">
+                {% for el in list %}
+                <div class="column">
+                    <a href="{{ el.url }}">
+                    {% if el.iconShow %}<img src="{{ vich_uploader_asset(el, el.iconName, el.className) }}" alt="icon section {{ el.name }}">{% endif %}
+                    <p>{{ el.name }}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

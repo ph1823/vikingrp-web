@@ -30,7 +30,7 @@ class Article implements \Serializable
     #[ORM\Column(length: 255)]
     private ?string $articleImageName = "";
 
-    #[Vich\UploadableField(mapping: 'textures', fileNameProperty: 'articleImageName')]
+    #[Vich\UploadableField(mapping: 'article', fileNameProperty: 'articleImageName')]
     private ?File $articleImage = null;
 
     #[ORM\Column(nullable: true)]

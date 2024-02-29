@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    min-height: 100vh;
+.bodyDiv {
+    min-height: 60vh;
+    background-color: #0B0B0B;
 }
 
 h2 {
