@@ -24,7 +24,7 @@ class WikiPage
     #[ORM\OneToMany(mappedBy: 'wikiPage', targetEntity: WikiImage::class, cascade: ['persist', 'remove'])]
     private Collection $images;
 
-    #[ORM\ManyToOne(inversedBy: 'pages')]
+    #[ORM\ManyToOne(cascade: ['remove'], inversedBy: 'pages')]
     private ?WikiCategory $wikiCategory = null;
 
     #[ORM\Column(length: 255)]

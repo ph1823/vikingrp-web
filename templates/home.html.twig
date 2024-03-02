@@ -36,7 +36,7 @@
     </section>
 
 
-    <section id="trailer-section" style="background-color:#060606; height:55vh" class="items-center flex p-2">
+    <section id="trailer-section" style="background-color:#060606" class="items-center flex p-2">
         <div class="flex justify-center items-center">
             <div class="flex flex-wrap justify-center items-center">
                 <div id="text-center" data-aos="zoom-in" class="p-4" style="width: 50%;">
@@ -58,7 +58,7 @@
 
     <!-- path note section !-->
     <section class="flex flex-col items-center justify-center text-center bg-cover" id="patch"
-             style="height:110vh; background-image: linear-gradient(to bottom, #060606, #06060680), url({{ asset('assets/img/bg/2.png') }}); background-repeat:no-repeat; margin: auto;">
+             style="background-image: linear-gradient(to bottom, #060606, #06060680), url({{ asset('assets/img/bg/2.png') }}); background-repeat:no-repeat; margin: auto;">
 
         <div data-aos="zoom-in" class="flex flex-col items-center mx-auto text-center" style="width: 42%;">
             <h1 class="text-8xl italic p-3"
@@ -77,6 +77,7 @@
                 <div class="mt-4 mb-4">
                     <h2>{{ article.title }}</h2>
                     <p>{{ article.content | slice(0, 180) | raw }}</p>
+                    <p>{% if article.articleImageName is not null %}<img src="{{ vich_uploader_asset(article) }}">{% endif %}</p>
                     <p class="font-bold">Le {{ article.writeDate.format('d F Y à H:i') }}</p>
                 </div>
             {% endfor %}

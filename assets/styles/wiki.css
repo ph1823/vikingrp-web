@@ -4,11 +4,15 @@
     justify-content: center;
     text-align: center;
 }
+
+.bodyDiv {
+    background: url("./bg-test.png");
+}
+
 .column {
     flex: 1 0 calc(20% - 10px);
     margin: 5px;
     padding: 20px;
-    background-color: #f0f0f0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

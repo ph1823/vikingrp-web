@@ -31,7 +31,7 @@ class WikiCategory
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'wikiCategory', targetEntity: WikiPage::class)]
+    #[ORM\OneToMany(mappedBy: 'wikiCategory', targetEntity: WikiPage::class, cascade: ['remove'])]
     private Collection $pages;
 
     public function __construct()

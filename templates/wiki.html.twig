@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block body %}
-    <div>
+    <div style="max-height: 100vh; overflow: scroll">
         {% if wiki is not null %}
             {% for image in wiki.images %}
                 <img src="{{ vich_uploader_asset(image, 'wikiImage') }}" style="margin: auto"/>
@@ -23,8 +23,7 @@
             {% for page in cats %}
                     <div class="column">
                         <a href="{{ path('wiki_cat', {cat_url: page.wikiCategory.catUrl, url: page.url}) }}">
-                            {% if page.iconImage is not null %}<img src="{{ vich_uploader_asset(page, "iconImage") }}" alt="icon section {{ page.url }}">{% endif %}
-                            <p>{{ page.url }}</p>
+                            {% if page.iconImageName is not null %}<img src="{{ vich_uploader_asset(page, "iconImage") }}" alt="icon section {{ page.url }}">{% endif %}
                         </a>
                     </div>
             {% endfor %}
@@ -34,8 +33,7 @@
                 {% for el in list %}
                 <div class="column">
                     <a href="{{ el.url }}">
-                    {% if el.iconShow %}<img src="{{ vich_uploader_asset(el, el.iconName, el.className) }}" alt="icon section {{ el.name }}">{% endif %}
-                    <p>{{ el.name }}</p>
+                    {% if el.iconShow %}<img src="{{ vich_uploader_asset(el.icon, el.iconName, el.className) }}" alt="icon section {{ el.name }}">{% endif %}
                     </a>
                 </div>
                 {% endfor %}
