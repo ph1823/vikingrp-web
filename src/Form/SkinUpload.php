@@ -14,8 +14,26 @@ class SkinUpload extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('skinImage', VichImageType::class, ['image_uri' => false, 'allow_delete' => false, 'download_label' => 'Télécharger le skin'])
-        ;
+            ->add(
+                'skinImage',
+                VichImageType::class,
+                [
+                    'image_uri' => false,
+                    'allow_delete' => false,
+                    'download_label' => 'Télécharger le skin',
+                    'constraints' => [
+                        new Image([
+                            'maxSize' => '3M',
+                            'maxSizeMessage' => 'Le fichier est trop lourd ({{ size }} {{ suffix }}). Taille maximum : {{ limit }} {{ suffix }}.',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                            ],
+                            'mimeTypesMessage' => 'Le fichier doit être une image valide (jpeg, png).',
+                        ]),
+                    ]
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
