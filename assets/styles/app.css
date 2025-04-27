@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bodyDiv {
+    min-height: 60vh;
+    background-color: #0B0B0B;
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+
+#profile {
+    width: 40%;
+    background-color: rgba(255,255,255,0.42);
+    display: inline-block;
+    min-height: 612px;
+    margin: 2em;
+    vertical-align: top;
+}
+
+#skin {
+    width: 40%;
+    background-color: rgba(255,255,255,0.42);
+    display: inline-block;
+    margin: 2em;
+    min-height: 612px;
+}
+
+#basicInfo {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#actualSkin, #basicInfo {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#menu-button-skin {
+    background-color: #ffffff20;
+    border: 1px solid rgb(60, 60, 65);
+}
+
+.dropdown-content {
+    left: 10%;
+    border: 1px solid rgb(60, 60, 65);
+    padding: .4em;
+}
+
+.icon {
+    margin-left: .2em;
+}

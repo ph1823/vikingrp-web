@@ -4,13 +4,24 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\User;
+use App\Entity\WikiCategory;
+use App\Entity\WikiPage;
 use App\Form\SkinUpload;
 use App\Repository\ArticleRepository;
+use App\Repository\WikiCategoryRepository;
+use App\Repository\WikiPageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use JetBrains\PhpStorm\NoReturn;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPasswordValidator;
+use function Symfony\Component\String\u;
 
 class HomeController extends BaseController
 {
@@ -26,9 +37,8 @@ class HomeController extends BaseController
         return $this->renderBase('home.html.twig', ['article' => $article]);
     }
 
-
-    #[Route('/skin', name: 'skin_main')]
-    public function skin(Request $request, EntityManagerInterface $entityManager): RedirectResponse|Response
+    #[Route('/profile', name: 'user_profile')]
+    public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var ?User $user */
         $user = $this->getUser();
@@ -44,24 +54,50 @@ class HomeController extends BaseController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_home');
         }
 
-        return $this->renderBase('skin/upload.html.twig', [
+        return $this->renderBase('user/dashboard.html.twig', [
             'skinForm' => $form->createView()
         ]);
     }
 
-    #[Route('/skin/create', name: 'skin_create')]
-    public function createSkin()
-    {
 
+    #[NoReturn] #[Route('/wiki/{cat_url?}/{url?}', name: 'wiki_cat')]
+    public function wiki_cat(?string $cat_url, ?string $url, WikiCategoryRepository $wikiCategoryRepository, WikiPageRepository $wikiPageRepository): Response
+    {
+        /** @var ?WikiCategory $wikiCategory */
+        $wikiCategory = $cat_url ? $wikiCategoryRepository->findOneBy(["cat_url" => $cat_url]) : null;
+        $wikiPage = !$wikiCategory ? $wikiPageRepository->findOneBy(["url" => $cat_url, "wikiCategory" => null]) : null;
+        $list = [];
+        if($url != null)
+            $wikiPage = $wikiCategory->getPages()->findFirst(function (int $index, WikiPage $page) use ($url) {
+                return $page->getUrl() === $url;
+            });
+
+        //if we are on main page, we generate a list of cat / wikiaricle without cat
+        if($url == null && $wikiCategory == null) {
+            $list = array_map(function(WikiCategory $cat) {
+                return ["icon" => $cat, "name" => $cat->getCatUrl(),
+                    "iconName" => "catImage", "className" => $cat::class,
+                    "url" => $this->generateUrl('wiki_cat', ["cat_url" =>  $cat->getCatUrl()]),
+                    "iconShow" => $cat->getCatImageName() != null];
+            }, $wikiCategoryRepository->findAll());
+            //
+            $list = array_merge($list, array_map(function(WikiPage $page) {
+                return ["icon" => $page,
+                    "iconShow" => $page->getIconImageName() != null,
+                    "name" => $page->getUrl(),
+                    "url" => $this->generateUrl('wiki_cat', ["cat_url" =>  $page->getUrl()]),
+                    "iconName" => "iconImage",
+                    "className" => $page::class];
+            }, $wikiPageRepository->findBy(['wikiCategory' => null])));
+        }
+
+        return $this->renderBase('wiki.html.twig', [
+            'wiki' => $wikiPage,
+            'cats' => $wikiCategory?->getPages()->toArray(),
+            'list' => $list
+        ]);
     }
 
-    #[Route('/profile', name: 'user_profile')]
-    public function profile()
-    {
-        return $this->renderBase('user/dashboard.html.twig');
-    }
 }

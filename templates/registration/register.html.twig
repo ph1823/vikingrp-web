@@ -1,19 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <section style="background: url('{{ asset('assets/img/bg/2.png') }}'); height: -webkit-fill-available;">
+        <h1 style="text-align: center">Inscription</h1>
+        {{ form_start(registrationForm, {attr: {class: 'registerForm'}}) }}
+        <div class="form-div">
+            {{ form_label(registrationForm.username, 'Nom d\'utilisateur') }}
+            {{ form_widget(registrationForm.username) }}
+            <span class="error">{{ form_errors(registrationForm.username) }}</span>
+        </div>
+        <div class="form-div">
+            {{ form_label(registrationForm.mail, 'Adresse mail') }}
+            {{ form_widget(registrationForm.mail) }}
+            <span class="error">{{ form_errors(registrationForm.mail) }}</span>
+        </div>
+        <div class="form-div">
+            {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+            {{ form_widget(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
+        </div>
 
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <button type="submit" class="confirm">Inscription</button>
+        {{ form_end(registrationForm) }}
+    </section>
 {% endblock %}
