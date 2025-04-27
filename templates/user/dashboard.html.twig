@@ -4,14 +4,23 @@
 
 {% block body %}
 <section style="background: linear-gradient(to bottom, #0B0B0B50, #0B0B0B), url({{ asset('assets/img/bg/6.png') }}); background-size:cover;height: 95vh;" id="main">
-    <div style="backdrop-filter: blur(5px); height:95vh"  class="flex justify-evenly items-center">
-        
-        <div style="background-color: #0B0B0B99; border: 1px solid rgb(60, 60, 65);">
-            <canvas style="width: 100px;" id="skin_container"></canvas>
-        </div>
+    <div id="profile">
+        <form onsubmit="">
+            <div class="form-div">
+                <label for="email">Adresse E-mail</label>
+                <input type="email" value="{{ app.user.mail }}" id="email">
+            </div>
+            <div class="form-div">
+                <label for="username">Nom d'utilisaeur</label>
+                <input type="text" id="username" name="username" value="{{ app.user.username }}">
+            </div>
+            <div class="form-div">
 
+            </div>
+        </form>
     </div>
-
-
+    <div id="skin">
+        ici on affiche le skin
+    </div>
 </section>
 {% endblock %}

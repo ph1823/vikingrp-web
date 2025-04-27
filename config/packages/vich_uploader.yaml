@@ -1,0 +1,12 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        textures:
+            uri_prefix: /images/skin
+            upload_destination: '%kernel.project_dir%/public/images/skin'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        article:
+            uri_prefix: /images/article
+            upload_destination: '%kernel.project_dir%/public/images/article'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
