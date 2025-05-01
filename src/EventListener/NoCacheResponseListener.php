@@ -11,11 +11,11 @@ class NoCacheResponseListener
         $request = $event->getRequest();
         $response = $event->getResponse();
 
-        if ($request->getPathInfo() === '/api/') {
-            $response->headers->addCacheControlDirective('no-cache', true);
-            $response->headers->addCacheControlDirective('private', true);
+        if (str_contains($request->getPathInfo(), "/api/")) {
+            $response->headers->addCacheControlDirective('no-cache');
+            $response->headers->addCacheControlDirective('private');
             $response->headers->addCacheControlDirective('max-age', 0);
-            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->headers->addCacheControlDirective('must-revalidate');
         }
     }
 }

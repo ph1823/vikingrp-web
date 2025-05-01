@@ -146,3 +146,205 @@ canvas.hidden {
     text-decoration: none;
     background-color: #e0bf35;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
+
+:root{
+    --color-alpha: #3e3f57;
+}
+
+section>div:nth-child(2){
+    background-image : url("https://i.ibb.co/z6JyG3v/2024-02-11-18-38-27.png");
+    background-position: top;
+    background-size: cover;
+}
+
+#skinComposer {
+    height: 100vh !important;
+    color: white;
+    font-weight:bold;
+    text-transform: uppercase;
+    font-family: "Caesar Dressing", system-ui;
+    font-weight: 400;
+    letter-spacing:3px;
+    font-style: normal;
+    /* background: radial-gradient(var(--color-alpha), #000); */
+    backdrop-filter: blur(10px);
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    -webkit-box-shadow: 0px -6px 24px 11px #0f0f15, inset 0px 0px 29px 4px #0F0F15;
+    box-shadow: 0px -10px 24px 20px #0f0f15, inset 0px 0px 29px 4px #0F0F15;
+    border-top: 2px solid var(--color-alpha);
+    border-bottom: 2px solid var(--color-alpha);
+}
+#skinComposer div {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+}
+
+.left-column ul{
+    padding: 2em;
+    width: 90%;
+    max-height: unset;
+    height: 94%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+
+.left-column>ul{
+    border: 12px solid var(--color-alpha);
+    outline: 6px solid black;
+    outline-offset: -9px;
+    position: relative;
+
+    -webkit-box-shadow: 0px 0px 29px 4px #0F0F15;
+    box-shadow:  0px 0px 29px 4px #0F0F15;
+}
+
+.left-column>ul>li{
+    justify-content: center;
+    align-items:start;
+    flex-direction: column;
+    width: 112%;
+}
+
+.left-column ul ul{
+    padding: 25px;
+    margin: 10px !important;
+    justify-content: center;
+    align-items:start;
+    flex-direction: column;
+}
+
+li.file{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 98%;
+    margin: 5px;
+    margin-top: 15px;
+}
+
+.right-column{
+    display: unset !important;
+    overflow-y: scroll !important;
+    width:20% !important;
+}
+
+.layers-container{
+    padding-top: 13px;
+    padding-right: 13px;
+    overflow-y: scroll !important;
+    border: unset !important;
+}
+
+.left-column{
+    width:30% !important;
+    border: unset !important;
+}
+
+.central-column{
+    width: 45%;
+}
+
+.choosed-part-label{
+    max-width: 250px;
+}
+
+.right-column img{
+    margin: 0 auto;
+}
+
+.right-column li{
+    transition: transform 0.2s, background-color .2s;
+    background-color: rgba(0,0,0,0.5);
+    border: 12px solid var(--color-alpha);
+    outline: 6px solid black;
+    outline-offset: -9px;
+}
+
+.right-column li:hover{
+    transform: translateX(-15px);
+    background-color: rgba(0,0,0,0.75);
+}
+
+.delete-part{
+    background-image: url("https://cdn-icons-png.flaticon.com/512/6861/6861362.png");
+    opacity: 0.3;
+    transition: opacity .2s;
+}
+
+.right-column li:hover .delete-part{
+    opacity: 0.6;
+}
+
+.file span{
+    display: block;
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Buttons */
+
+/* .confirm, .download {
+    padding: 10px 20px;
+    background-color: #795649;
+    color: #f4e5c3;
+    border: 2px solid #c0a080;
+    font-size: 18px;
+    text-shadow: 1px 1px 0px #a67c52;
+    box-shadow: 2px 2px 0px #a67c52;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: contrast(200%) grayscale() brightness(60%);
+}
+
+.confirm:hover, .download:hover {
+    background-color: #4d372f;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.confirm:active, .download:active {
+    box-shadow: inset 1px 1px 2px 0px rgba(0, 0, 0, 0.5);
+    transform: translateY(2px);
+} */
+
+.central-column .confirm, .central-column .download {
+    width: 275px;
+    height : 73px;
+    background: unset;
+    background-image : url("https://i.ibb.co/BcnP3gs/bbb.png");
+    line-height:55px;
+    font-size:20px;
+    color: #fefeff;
+    background-position : center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:15px;
+
+    filter: contrast(150%)  brightness(80%) drop-shadow(0px 0px 15px rgb(36 36 56 ));
+
+
+    transform : scale(0.85);
+
+    transition: transform .2s, opacity .2s;
+    opacity: .3;
+}
+
+.central-column .confirm:hover, .central-column .download:hover{
+    opacity: 1;
+}
+
+.central-column .confirm:active, .central-column .download:active{
+    transform : scale(0.8);
+    opacity: 1;
+}
