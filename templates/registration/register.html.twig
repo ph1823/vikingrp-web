@@ -3,11 +3,12 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <section style="background: url('{{ asset('assets/img/bg/2.png') }}'); height: -webkit-fill-available;">
         <h1 style="text-align: center">Inscription</h1>
         {{ form_start(registrationForm, {attr: {class: 'registerForm'}}) }}
         <div class="form-div">
-            {{ form_label(registrationForm.username, 'Nom d\'utilisateur') }}
+            {{ form_label(registrationForm.username, 'Pseudonyme en jeu') }}
             {{ form_widget(registrationForm.username) }}
             <span class="error">{{ form_errors(registrationForm.username) }}</span>
         </div>
@@ -24,7 +25,16 @@
             <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
         </div>
 
-        <button type="submit" class="confirm">Inscription</button>
+        <button type="submit" class="g-recaptcha confirm"
+                data-sitekey="{{ app.request.server.get('6Lffd00rAAAAAEbrBAf32oJCCfV8o3Wk7d4ymEH2') }}"
+                data-callback='onSubmit'
+                data-action='submit'>Inscription</button>
         {{ form_end(registrationForm) }}
     </section>
+    <script>
+        function onSubmit(token) {
+            <!-- document.getElementById("demo-form").submit(); !-->
+            console.log(token);
+        }
+    </script>
 {% endblock %}
